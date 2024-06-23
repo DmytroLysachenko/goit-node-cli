@@ -36,9 +36,7 @@ export async function addContact(name, email, phone) {
   const newContact = { name, email, phone, id: faker.string.uuid() };
   const data = await fs.readFile(contactsPath, 'utf-8');
   const contacts = JSON.parse(data);
-  fs.writeFile(
-    contactsPath,
-    JSON.stringify(contacts.push(newContact), null, 2)
-  );
+  contacts.push(newContact);
+  fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
   return newContact;
 }
